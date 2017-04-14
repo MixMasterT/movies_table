@@ -1,0 +1,37 @@
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.info {
+  text-align: center;
+}
+input {
+  margin: 15px auto;
+  font-size: 14px;
+}
+
+#movies-table {
+  background-color: #777;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 3px;
+  margin: 0 auto;
+}
+
+#movies-table th {
+  padding: 10px;
+  font-size: 16pt;
+  font-weight: bold;
+}
+#movies-table td, #movies-table th {
+  padding: 10px;
+}
+#movies-table tr:nth-child(even) {
+  background-color: #AAA;
+}
+
+#movies-table tr:nth-child(odd) {
+  background-color: #DDD;
+}
