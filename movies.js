@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   var movieData = {};
   var movieTitles = [];
+  var words = [];
 
   var dataLoaded = false;
 
@@ -27,22 +28,71 @@ document.addEventListener('DOMContentLoaded', function() {
         if (idx === 96) {
           dataLoaded = true;
           movieTitles = Object.keys(movieData);
+          movieTitles.forEach(function(title) {
+            var titleWords = title.split(" ");
+            titleWords.forEach(function(word) {
+              if (!words.includes(word)) {
+                words.push(word);
+              }
+            })
+          })
+          // console.log(words);
           setTableData(movieData, moviesTable)
         }
       }
-      else {
-
-      }
+      // else {
+      //   console.log("Data unavailable...");
+      // }
     }
   }
 
   for (var i = 16; i < 97; i++) {
     fetchMovie(i);
   }
-  // console.log(movieData);
+
+  var search = document.getElementById('search');
+
+  var dropDown = document.getElementById('drop-down');
+
+  search.onblur = function() {
+    dropDown.innerHTML = "";
+  }
+
+  search.onkeyup = function(e) {
+    if (e.target.value !== '') {
+      matches = [];
+      matchObject = {};
+      movieTitles.forEach(function(movie) {
+        if (movie.match(e.target.value)) {
+          matchObject[movie] = movieData[movie];
+          matches.push(movie);
+        }
+      })
+
+      setTableData(matchObject, moviesTable);
+
+      // dropDown.innerHTML = "";
+      //
+      // matches.forEach(function(match) {
+      //   var newItem = document.createElement('li');
+      //   newItem.innerHTML = match;
+      //   dropDown.appendChild(newItem);
+      // })
+      // console.log(e.target.value);
+    }
+  }
+
+  // dropDown.addEventListener('click', function(e) {
+  //   console.log("clicked on menu");
+  // })
+  // dropDown.onclick = function(e) {
+  //   console.log("search clicked....");
+  // }
+
   // future more general implementation should pass in fields.
   // here fields are hard-coded to details...
   function setTableData(dataObject, tableElement) {
+    tableElement.innerHTML = "";
     Object.keys(dataObject).forEach(function(movie, id) {
       var newDataRow = document.createElement('tr');
       var newTitle = document.createElement('td');

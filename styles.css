@@ -12,12 +12,45 @@ input {
   font-size: 14px;
 }
 
+#search {
+  position: relative;
+  width: 400px;
+  height: 26px;
+}
+
+#drop-down {
+  position: absolute;
+  width: 400px;
+  background: white;
+  z-index: 5;
+}
+
+#drop-down li {
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  list-style: none;
+  border: 3px #777 solid;
+  background: white;
+  padding: 12px;
+  z-index: 5;
+}
+
+#drop-down li:hover {
+  background: grey;
+  color: white;
+  cursor: pointer;
+}
+
 #movies-table {
+  position: relative;
   background-color: #777;
   text-align: center;
   border-collapse: separate;
   border-spacing: 3px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 #movies-table th {
