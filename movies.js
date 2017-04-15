@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   var movieData = {};
+  var movieTitles = [];
 
   var dataLoaded = false;
 
@@ -25,26 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (idx === 96) {
           dataLoaded = true;
-          Object.keys(movieData).forEach(function(movie, id) {
-            var newDataRow = document.createElement('tr');
-            var newTitle = document.createElement('td');
-            var newYear = document.createElement('td');
-            var newGenre = document.createElement('td');
-
-            if (!(movieData[movie].Year)) {
-              console.log("this one is undefined ", movie, id);
-            }
-
-            newTitle.innerHTML = movie;
-            newYear.innerHTML = movieData[movie].Year.slice(0,4);
-            newGenre.innerHTML = movieData[movie].Genre;
-
-            [newTitle, newYear, newGenre].forEach(function(tdTag) {
-              newDataRow.appendChild(tdTag);
-            });
-
-            moviesTable.appendChild(newDataRow);
-          })
+          movieTitles = Object.keys(movieData);
+          setTableData(movieData, moviesTable)
         }
       }
       else {
@@ -57,4 +40,24 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchMovie(i);
   }
   // console.log(movieData);
+  // future more general implementation should pass in fields.
+  // here fields are hard-coded to details...
+  function setTableData(dataObject, tableElement) {
+    Object.keys(dataObject).forEach(function(movie, id) {
+      var newDataRow = document.createElement('tr');
+      var newTitle = document.createElement('td');
+      var newYear = document.createElement('td');
+      var newGenre = document.createElement('td');
+
+      newTitle.innerHTML = movie;
+      newYear.innerHTML = movieData[movie].Year.slice(0,4);
+      newGenre.innerHTML = movieData[movie].Genre;
+
+      [newTitle, newYear, newGenre].forEach(function(tdTag) {
+        newDataRow.appendChild(tdTag);
+      });
+
+      tableElement.appendChild(newDataRow);
+    })
+  }
 })
